@@ -1,0 +1,26 @@
+{% extends "home/layout.html" %}
+{% block title %}{{user.username}}'s profile{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <h1>{{user.username}}</h1>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#orders">Orders</button>
+        <div class="collapse multi-collapse" id="orders">
+            {%for order in orders%}
+            <div class="card card-header mt-3">
+                <h3>Order:{{order.id}}</h3>
+                <div class="card-body">
+                    <ul class="navbar-nav">
+                        {% for product in order.item.all %}
+                        <li class="nav-item">{{product.product.product.brand}} {{product.product.product.name}}, {{product.product.size}}</li>
+                        <li class="nav-item">Quantity: {{product.quantity}}</li>
+                        {% endfor %}
+                        <li class="nav-item">${{order.total}}</li>
+                    </ul>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+
+</div>
+
+{% endblock %}

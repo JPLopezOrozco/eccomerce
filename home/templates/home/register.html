@@ -1,0 +1,34 @@
+{% extends "home/layout.html" %}
+{% block title %}Register{% endblock %}
+{% block body %}
+<div class="container-fluid d-flex align-self-center flex-column w-50">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="User@mail.com">
+            <label for="email">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" name="username" placeholder="User">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="firstname" name="first_name" placeholder="User">
+            <label for="firstname">First name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="lastname" name="last_name" placeholder="User">
+            <label for="lastname">Last name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
+            <label for="password1">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password">
+            <label for="password2">Confirm Password</label>
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "home/layout.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="container-products">
+  {% for product in products %}
+  <div class="card card-product mt-3">
+        <a class="nav-link" href="{% url 'home:product' product.id %}">
+        <img src="{{product.image.url}}" alt="{{product.name}}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{product.brand}} {{product.name}}</h5>
+          <p class="card-text">${{product.price}}</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

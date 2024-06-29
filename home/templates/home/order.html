@@ -1,0 +1,24 @@
+{% extends "home/layout.html" %}
+{% load static %}
+{% block title %}Order{% endblock %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'home/order.css' %}">
+{% endblock %}
+{% block body %}
+<div class="container-purchase">
+    {% if message %}
+    <h2>{{message}}</h2>
+    {% else %}
+    <h2>Thank you</h2>
+    <strong>Purchase succesful</strong>
+    <span>Price: ${{order.total}}</span>
+    <div class="contianer-product">
+        <ul>
+            {% for item in items %}
+                <li>{{item.quantity}} X {{ item.product.product.name }} Size:{{item.product.size}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

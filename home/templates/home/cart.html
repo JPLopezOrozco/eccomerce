@@ -1,0 +1,39 @@
+{% extends "home/layout.html" %}
+{% block title %}Cart{% endblock %}
+{% block body %}
+
+{% for product in products %}
+<div class="">
+    <div class="card" style="width: 18rem;">
+        <img src="{{product.product.image.url}}" alt="{{product.name}}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{product.product.brand}} {{product.product.name}}</h5>
+            <p class="card-text">{{product.size}}</p>
+            <form action="{% url 'home:cart_remove' product.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">Remove</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+    <strong>Total: ${{cart.total}}</strong>
+    <form action="{% url 'home:buy'%}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">Buy now</button>
+    </form>
+
+    
+
+    {% for message in messages %}
+    {% if message.tag == buy %}
+    {{message}}
+    {% endif %}
+    {% if message.tag == remove%}
+    {{message}}
+    {% endif %}
+    {% endfor %}
+
+
+{% endblock %}
