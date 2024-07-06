@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LogoutView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from cart.models import CartUser
 from products.models import Product, Review
 from users.models import User
@@ -125,6 +127,16 @@ class AllProductsView(View):
     template_name = 'home/allproducts.html'
     def get(self, request):
         products = Product.objects.all()
+        
+        page = request.GET.get('page')
+        paginator = Paginator(products, 8)
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products=paginator.page(paginator.num_pages)
+        
         return render(request, self.template_name,{
             'products':products
         })
